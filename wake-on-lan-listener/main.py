@@ -5,15 +5,14 @@ import wakeonlan
 import subprocess
 from scapy.all import sniff, IP
 
-# Load configuration
+# Load configuration from Home Assistant's UI options
 CONFIG_FILE = "/data/options.json"
 logging.basicConfig(level=logging.INFO)
 
-# Cooldown time in seconds
-COOLDOWN_TIME = 300  # 5 minutes
 last_wake_time = 0
 
 def load_config():
+    """Load user-configured settings from Home Assistant's UI."""
     try:
         with open(CONFIG_FILE, "r") as f:
             return json.load(f)
@@ -22,7 +21,7 @@ def load_config():
         return None
 
 def is_host_awake(target_ip):
-    """Check if the GameStreamNAS is awake using ping."""
+    """Check if PC is already online using ping."""
     try:
         result = subprocess.run(
             ["ping", "-c", "1", target_ip],
@@ -34,17 +33,17 @@ def is_host_awake(target_ip):
         logging.error(f"Ping error: {e}")
         return False
 
-def wake_device(mac_address):
-    """Send a WoL packet to the GameStreamNAS."""
+def wake_device(mac_address, cooldown_seconds):
+    """Send a Wake-on-LAN (WoL) packet if needed."""
     global last_wake_time
     current_time = time.time()
 
-    if current_time - last_wake_time < COOLDOWN_TIME:
+    if current_time - last_wake_time < cooldown_seconds:
         logging.info("Skipping WoL: Cooldown period active.")
         return
 
     if is_host_awake(mac_address):
-        logging.info("Skipping WoL: GameStreamNAS is already online.")
+        logging.info("Skipping WoL: PC is already online.")
         return
 
     logging.info(f"Sending WoL packet to {mac_address}")
@@ -52,17 +51,18 @@ def wake_device(mac_address):
     last_wake_time = current_time
 
 def packet_callback(packet):
-    """Handle detected network packets."""
+    """Check incoming packets and wake up PC if needed."""
     config = load_config()
     if not config:
         return
 
     target_ip = config["target_ip"]
     mac_address = config["mac_address"]
+    cooldown_seconds = config.get("cooldown_seconds", 300)
 
     if packet.haslayer(IP) and packet[IP].dst == target_ip:
         logging.info(f"Network activity detected to {target_ip}")
-        wake_device(mac_address)
+        wake_device(mac_address, cooldown_seconds)
 
 def main():
     config = load_config()
