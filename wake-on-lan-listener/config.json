@@ -1,0 +1,21 @@
+{
+  "name": "GameStream WOL",
+  "version": "1.0.0",
+  "slug": "gamestream_wol",
+  "description": "Wakes up GameStreamNAS on network activity",
+  "startup": "application",
+  "boot": "auto",
+  "options": {
+    "target_ip": "192.168.1.100",
+    "mac_address": "AA:BB:CC:DD:EE:FF",
+    "network_interface": "eth0"
+  },
+  "schema": {
+    "target_ip": "str",
+    "mac_address": "str",
+    "network_interface": "str"
+  },
+  "arch": ["amd64", "armv7", "aarch64"],
+  "map": ["config:rw"],
+  "homeassistant": "2023.1.0"
+}
