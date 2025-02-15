@@ -1,6 +1,6 @@
 {
   "name": "HA WOL",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "slug": "ha_wol",
   "description": "Wakes up target PC on network activity",
   "startup": "application",
