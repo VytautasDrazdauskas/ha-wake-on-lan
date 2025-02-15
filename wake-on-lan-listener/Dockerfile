@@ -5,7 +5,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 WORKDIR /app
 
 # Install dependencies
-RUN apt update && apt install -y bash && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y \
+    bash \
+    libpcap-dev \
+    tcpdump \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN pip install --no-cache-dir wakeonlan scapy psutil
 
 # Copy add-on files
