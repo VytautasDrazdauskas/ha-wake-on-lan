@@ -1,0 +1,37 @@
+{
+  "name": "Wake-on-LAN Listener",
+  "version": "1.1.0",
+  "slug": "wake-on-lan-listener",
+  "description": "Monitors network activity and wakes up a PC when needed.",
+  "arch": [
+    "armhf",
+    "armv7",
+    "aarch64",
+    "amd64",
+    "i386"
+  ],
+  "startup": "services",
+  "boot": "auto",
+  "host_network": true,
+  "options": {
+    "target_ip": "192.168.1.100",
+    "mac_address": "AA:BB:CC:DD:EE:FF",
+    "network_interface": "eth0",
+    "cooldown_seconds": 300
+  },
+  "schema": {
+    "target_ip": "str",
+    "mac_address": "str",
+    "network_interface": "str",
+    "cooldown_seconds": "int"
+  },
+  "map": ["config:rw"],
+  "privileged": ["NET_ADMIN"],
+  "build_from": {
+    "aarch64": "python:3.9-slim",
+    "amd64": "python:3.9-slim",
+    "armhf": "python:3.9-slim",
+    "armv7": "python:3.9-slim",
+    "i386": "python:3.9-slim"
+  }
+}
