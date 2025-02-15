@@ -1,7 +1,7 @@
 {
     "name": "Wake on LAN Listener",
     "version": "1.0.5",
-    "slug": "wake_on_lan_listener",
+    "slug": "wake-on-lan-listener",
     "description": "Listens for network activity to wake up target PC",
     "startup": "services",
     "boot": "auto",
