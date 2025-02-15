@@ -15,7 +15,7 @@ This Home Assistant add-on listens for network activity towards a specific PC an
    - Click the **three dots (⋮) > Repositories**.
    - Enter your repository URL:
      ```
-     https://github.com/yourusername/ha-wake-on-lan
+     https://github.com/VytautasDrazdauskas/ha-wake-on-lan 
      ```
    - Click **Add** and refresh the page.
 
