@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Install dependencies
 RUN apt update && apt install -y bash && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir wakeonlan scapy
+RUN pip install --no-cache-dir wakeonlan scapy psutil
 
 # Copy add-on files
 COPY run.sh /run.sh
