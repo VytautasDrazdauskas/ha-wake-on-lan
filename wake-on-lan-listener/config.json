@@ -1,8 +1,8 @@
 {
-  "name": "HA WOL",
-  "version": "1.0.3",
-  "slug": "ha_wol",
-  "description": "Wakes up target PC on network activity",
+  "name": "Wake-on-LAN Listener",
+  "version": "1.0.4",
+  "slug": "wake-on-lan-listener",
+  "description": "Wakes up target PC on network activity.",
   "startup": "application",
   "boot": "auto",
   "options": {
@@ -18,5 +18,6 @@
     "cooldown_seconds": "int"
   },
   "arch": ["amd64", "armv7", "aarch64"],
-  "map": ["config:rw"]
+  "map": ["config:rw"],
+  "homeassistant": "2025.1.0"
 }
