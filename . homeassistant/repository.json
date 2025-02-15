@@ -1,5 +1,0 @@
-{
-    "name": "HomeAssistant Add-on for listenings packets in local network and sending WakeOnLan magic packet for waking adresee PC.", 
-    "url": "https://github.com/VytautasDrazdauskas/ha-wake-on-lan",
-    "maintainer": "Vytautas Drazdauskas"
-} 
