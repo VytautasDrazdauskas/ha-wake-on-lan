@@ -1,23 +1,19 @@
 {
-  "name": "Wake-on-LAN Listener",
-  "version": "1.0.4",
-  "slug": "wake-on-lan-listener",
-  "description": "Wakes up target PC on network activity.",
-  "startup": "application",
-  "boot": "auto",
-  "options": {
-    "target_ip": "192.168.1.100",
-    "mac_address": "AA:BB:CC:DD:EE:FF",
-    "network_interface": "eth0",
-    "cooldown_seconds": 300
-  },
-  "schema": {
-    "target_ip": "str",
-    "mac_address": "str",
-    "network_interface": "str",
-    "cooldown_seconds": "int"
-  },
-  "arch": ["amd64", "armv7", "aarch64"],
-  "map": ["config:rw"],
-  "homeassistant": "2025.1.0"
+    "name": "Wake on LAN Listener",
+    "version": "1.0.5",
+    "slug": "wake_on_lan_listener",
+    "description": "Listens for network activity to wake up target PC",
+    "startup": "services",
+    "boot": "auto",
+    "options": {},
+    "schema": {},
+    "ports": {
+        "5000/tcp": 5000
+    },
+    "webui": "",
+    "ingress": false,
+    "ingress_port": 8099,
+    "panel_icon": "mdi:lan",
+    "map": ["config", "share"],
+    "host_network": true
 }
