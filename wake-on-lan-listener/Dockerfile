@@ -30,5 +30,5 @@ RUN chmod +x /run.sh
 # Install Python dependencies
 RUN pip3 install --no-cache-dir -r /app/requirements.txt || exit 0
 
-# Start the service
-CMD [ "/run.sh" ]
+# Use S6-Overlay to properly start the add-on
+ENTRYPOINT ["/run.sh"]
