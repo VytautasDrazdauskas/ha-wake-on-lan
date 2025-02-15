@@ -1,5 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/with-contenv bash
 set -e
 
 echo "Starting Wake-on-LAN Listener add-on..."
-exec python3 /app/main.py
+
+# Run the main Python script under the correct user
+exec s6-setuidgid root python3 /app/main.py
