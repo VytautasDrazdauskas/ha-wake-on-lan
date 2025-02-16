@@ -4,6 +4,7 @@ import logging
 import wakeonlan
 import subprocess
 import psutil
+import shutil
 from scapy.all import sniff, IP
 
 # Load configuration
@@ -31,6 +32,10 @@ def get_active_interface():
 
 def is_host_reachable(target_ip):
     """Check if the target PC is reachable at startup."""
+    if not shutil.which("ping"):
+        logging.error("Ping command not found in the container. Make sure 'iputils-ping' is installed.")
+        return False
+
     try:
         result = subprocess.run(
             ["ping", "-c", "2", target_ip],
