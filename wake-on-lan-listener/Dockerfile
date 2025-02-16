@@ -7,6 +7,7 @@ WORKDIR /app
 # Install dependencies
 RUN apt update && apt install -y \
     bash \
+    iputils-ping \ 
     libpcap-dev \
     tcpdump \
     && rm -rf /var/lib/apt/lists/*
