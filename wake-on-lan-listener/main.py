@@ -29,6 +29,24 @@ def get_active_interface():
             return iface
     return "eth0"  # Fallback to eth0
 
+def is_host_reachable(target_ip):
+    """Check if the target PC is reachable at startup."""
+    try:
+        result = subprocess.run(
+            ["ping", "-c", "2", target_ip],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        if result.returncode == 0:
+            logging.info(f"PC {target_ip} is already online at startup.")
+            return True
+        else:
+            logging.info(f"PC {target_ip} is not reachable at startup.")
+            return False
+    except Exception as e:
+        logging.error(f"Ping error: {e}")
+        return False
+
 def is_host_awake(target_ip):
     """Check if the target PC is awake using ping."""
     try:
@@ -87,9 +105,19 @@ def main():
         logging.error("No valid config found. Exiting.")
         return
 
+    target_ip = config["target_ip"]
+    mac_address = config["mac_address"]
+    cooldown_seconds = config.get("cooldown_seconds", 300)
+
+    # Check if the PC is reachable at startup
+    if is_host_reachable(target_ip):
+        logging.info(f"Skipping WoL at startup: PC {target_ip} is online.")
+    else:
+        logging.info(f"PC {target_ip} is offline at startup. Waiting for traffic to trigger WoL.")
+
     network_interface = get_active_interface()
     ports = config.get("ports", [])  # Get ports from config, default to empty (all traffic)
-    sniff_filter = build_sniff_filter(config["target_ip"], ports)
+    sniff_filter = build_sniff_filter(target_ip, ports)
 
     logging.info(f"Listening on {network_interface} with filter: {sniff_filter}")
 
