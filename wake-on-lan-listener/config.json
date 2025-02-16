@@ -1,6 +1,6 @@
 {
   "name": "Wake-on-LAN Listener",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "slug": "wake-on-lan-listener",
   "description": "Monitors network activity and wakes up a PC when needed.",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
