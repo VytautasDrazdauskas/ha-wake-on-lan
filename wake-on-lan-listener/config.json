@@ -12,7 +12,7 @@
     "mac_address": "AA:BB:CC:DD:EE:FF",
     "network_interface": "eth0",
     "cooldown_seconds": 300,
-    "ports": [445, 3389, 80]  // List of ports to monitor, empty = all traffic
+    "ports": [445, 3389, 80]
   },
   "schema": {
     "target_ip": "str",
